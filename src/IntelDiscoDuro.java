@@ -1,3 +1,10 @@
+/**
+ * Clase que representa un disco duro de la marca Intel. Implementa 
+ * la interfaz DiscoDuro y Componente, proporcionando información 
+ * sobre el nombre, precio, marca, tipo de componente, capacidad 
+ * y tipo de almacenamiento del disco duro.
+ * @author Gabo, Pedro Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class IntelDiscoDuro implements DiscoDuro, Componente {
     private String nombre;
     private double precio;
@@ -6,6 +13,15 @@ public class IntelDiscoDuro implements DiscoDuro, Componente {
     private int capacidad;
     private String tipoAlmacenamiento; // HDD o SSD
 
+    /**
+     * Constructor que inicializa los atributos del disco duro Intel.
+     * 
+     * @param nombre El nombre del modelo del disco duro.
+     * @param precio El precio del disco duro.
+     * @param marca La marca del disco duro.
+     * @param capacidad La capacidad del disco duro en GB.
+     * @param tipoAlmacenamiento El tipo de almacenamiento del disco duro (HDD o SSD).
+     */
     public IntelDiscoDuro(String nombre, double precio, String marca, int capacidad, String tipoAlmacenamiento) {
         this.nombre = nombre;
         this.precio = precio;

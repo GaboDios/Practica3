@@ -1,6 +1,14 @@
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Clase que implementa la interfaz ComponenteFactory para crear
+ * componentes especificos de la marca Intel. Esta fabrica 
+ * proporciona metodos para crear CPUs, GPUs, RAM, discos duros, 
+ * fuentes de alimentacion y placas base, cada uno con varias 
+ * opciones predefinidas.
+ * @author Gabo, Pedro Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class IntelFactory implements ComponenteFactory {
     private List<CPU> cpus = new ArrayList<>();
     private List<GPU> gpus = new ArrayList<>();
@@ -9,6 +17,11 @@ public class IntelFactory implements ComponenteFactory {
     private List<FuenteAlimentacion> fuentes = new ArrayList<>();
     private List<PlacaBase> placasBases = new ArrayList<>();
 
+    /**
+     * Constructor que inicializa las listas de componentes 
+     * con cinco opciones de cada tipo, todas de la marca Intel 
+     * o compatibles con sus CPUs.
+     */
     public IntelFactory() {
         // Inicializar con 5 opciones de CPU
         cpus.add(new IntelCPU("Intel Core i9-11900K", 500.0, "Intel", "LGA1200", 3.5));

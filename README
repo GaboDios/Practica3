@@ -1,1 +1,18 @@
-README PARA P03
+Nombre del Equipo: Los Hijos de Korhal
+Integrantes del Equipo:
+
+Pedro Yamil Salazar González - 306037445
+Gabriel Díaz Payne - 317097560
+Isaac Rivera Jiménez - 321225087
+Práctica: Práctica 2
+
+Sistema operativo utilizado: Se ha utilizado Linux para realizar la práctica, con la versión de Java "21.0.4".
+
+Para ejecutar el programa, escriba en la terminal javac *.java y luego java Main.
+
+Patrones de diseño utilizados:
+1. Adapter: Este patrón se ha implementado a través de la creación de componentes como CPU, GPU, RAM, Disco Duro, Fuente de Alimentación y Placa Base. Cada componente se ha diseñado como una interfaz que permite que diferentes implementaciones (como Intel y AMD) puedan coexistir en el sistema. Esto permite que los componentes de distintas marcas se adapten a un formato común, facilitando la integración en la configuración de PCs, resolviendo así incompatibilidades entre componentes de diferentes fabricantes.
+
+2. Builder: El patrón Builder se utiliza mediante la clase PCBuilder, que permite la construcción de un objeto PC de forma paso a paso. Cada método del builder se encarga de agregar un componente específico al PC, lo que facilita la personalización de la configuración. La clase OficinaPCBuilder proporciona una implementación concreta de este patrón, donde se inicializa una nueva PC vacía y se le agregan los componentes elegidos. Esto promueve la separación de la construcción de un objeto complejo y su representación, haciendo el código más limpio y mantenible.
+
+3. Abstract Factory: El patrón Abstract Factory se ha utilizado a través de las fábricas concretas, como IntelFactory y AMDFactory, que encapsulan la creación de componentes específicos para cada marca. Esto permite que el código del cliente (en este caso, el Main) no se preocupe por las instancias concretas de los componentes, sino que se limite a interactuar con la interfaz ComponenteFactory. Al hacerlo, se logra un código más flexible y escalable, permitiendo añadir fácilmente nuevas fábricas en el futuro sin modificar el flujo existente.

@@ -1,6 +1,16 @@
+/**
+ * Clase que implementa el patrn Builder para construir una PC de 
+ * tipo Gaming. Esta clase permite agregar componentes a la PC y 
+ * construirla paso a paso.
+ * 
+ * @author Gabo, Pedro Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class GamingPCBuilder implements PCBuilder {
     private PC pc;
 
+    /**
+     * Constructor que inicializa una nueva PC vacía.
+     */
     public GamingPCBuilder() {
         this.pc = new PC(); // Inicializamos una nueva PC vacía
     }
@@ -35,6 +45,10 @@ public class GamingPCBuilder implements PCBuilder {
         pc.setPlacaBase(placaBase);
     }
 
+    /**
+     * Construye y devuelve la PC completamente configurada.
+     * @return La PC construida.
+     */
     @Override
     public PC build() {
         return pc; // Retorna la PC completamente construida

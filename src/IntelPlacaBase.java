@@ -1,3 +1,11 @@
+/**
+ * Clase que implementa la interfaz PlacaBase y Componente
+ * para representar una placa base específica de la marca Intel.
+ * Proporciona informacion sobre el nombre, precio, marca, formato,
+ * chipset y socket compatible de la placa base.
+ * 
+ * @author Gabo, Pedro, Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class IntelPlacaBase implements PlacaBase, Componente {
     private String nombre;
     private double precio;
@@ -7,6 +15,16 @@ public class IntelPlacaBase implements PlacaBase, Componente {
     private String chipset;
     private String compatibleSocket; // Añadimos el socket compatible
 
+    /**
+     * Constructor que inicializa una placa base con los detalles proporcionados.
+     *
+     * @param nombre el nombre de la placa base
+     * @param precio el precio de la placa base
+     * @param marca la marca de la placa base
+     * @param formato el formato de la placa base
+     * @param chipset el chipset de la placa base
+     * @param compatibleSocket el socket compatible con la placa base
+     */
     public IntelPlacaBase(String nombre, double precio, String marca, String formato, String chipset, String compatibleSocket) {
         this.nombre = nombre;
         this.precio = precio;

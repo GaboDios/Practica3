@@ -1,3 +1,9 @@
+/**
+ * Clase que representa un disco duro AMD.
+ * Implementa las interfaces DiscoDuro y Componente.
+ * 
+ * @author Gabo, Pedro Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class AMDDiscoDuro implements DiscoDuro, Componente {
     private String nombre;
     private double precio;
@@ -6,6 +12,15 @@ public class AMDDiscoDuro implements DiscoDuro, Componente {
     private int capacidad;
     private String tipoAlmacenamiento; // HDD o SSD
 
+    /**
+     * Constructor para crear un disco duro AMD.
+     *
+     * @param nombre El nombre del disco duro.
+     * @param precio El precio del disco duro.
+     * @param marca La marca del disco duro.
+     * @param capacidad La capacidad del disco duro.
+     * @param tipoAlmacenamiento El tipo de almacenamiento (HDD o SSD).
+     */
     public AMDDiscoDuro(String nombre, double precio, String marca, int capacidad, String tipoAlmacenamiento) {
         this.nombre = nombre;
         this.precio = precio;
@@ -14,26 +29,51 @@ public class AMDDiscoDuro implements DiscoDuro, Componente {
         this.tipoAlmacenamiento = tipoAlmacenamiento;
     }
 
+    /**
+     * Obtiene el nombre del disco duro.
+     *
+     * @return El nombre del disco duro.
+     */
     @Override
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Obtiene el precio del disco duro.
+     *
+     * @return El precio del disco duro.
+     */
     @Override
     public double getPrecio() {
         return precio;
     }
 
+    /**
+     * Obtiene la marca del disco duro.
+     *
+     * @return La marca del disco duro.
+     */
     @Override
     public String getMarca() {
         return marca;
     }
 
+    /**
+     * Obtiene el tipo de componente.
+     *
+     * @return El tipo de componente.
+     */
     @Override
     public String getTipoComponente() {
         return tipoComponente;
     }
 
+    /**
+     * Obtiene una descripción del disco duro.
+     *
+     * @return Una cadena que decribe el disco duro.
+     */
     @Override
     public String getDescription() {
         return nombre + " - " + marca + " - Capacidad: " + capacidad + "GB - Tipo: " + tipoAlmacenamiento + " - Precio: $" + precio;
