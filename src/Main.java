@@ -4,29 +4,26 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ComponenteFactory factory = null;
-        EnsamblaPC pc = null;
+        ComponenteFactory amdFactory = new AMDFactory();
+        ComponenteFactory intelFactory = new IntelFactory();
+        EnsamblaPC pc = new EnsamblaPC();
 
         System.out.println("Bienvenido, ¿qué tipo de computadora deseas ensamblar?");
         System.out.println("1. AMD");
         System.out.println("2. Intel");
-        System.out.println("3. Personalizada");
+        System.out.println("3. Personalizada (Componentes AMD e Intel)");
 
         int choice = scanner.nextInt();
 
         switch (choice) {
             case 1:
-                factory = new AMDFactory();  // Fábrica AMD
-                pc = new EnsamblaPC(factory);
-                ensamblarPC(scanner, pc, factory);
+                ensamblarPC(scanner, pc, amdFactory, amdFactory);  // Solo componentes AMD
                 break;
             case 2:
-                factory = new IntelFactory();  // Fábrica Intel
-                pc = new EnsamblaPC(factory);
-                ensamblarPC(scanner, pc, factory);
+                ensamblarPC(scanner, pc, intelFactory, intelFactory);  // Solo componentes Intel
                 break;
             case 3:
-                System.out.println("La opción personalizada aún no está implementada.");
+                ensamblarPC(scanner, pc, amdFactory, intelFactory);  // Componentes de AMD e Intel
                 break;
             default:
                 System.out.println("Opción no válida.");
@@ -34,7 +31,7 @@ public class Main {
         }
     }
 
-    public static void ensamblarPC(Scanner scanner, EnsamblaPC pc, ComponenteFactory factory) {
+    public static void ensamblarPC(Scanner scanner, EnsamblaPC pc, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         boolean salir = false;
         boolean cpuElegido = false, gpuElegido = false, ramElegido = false, ddElegido = false, fuenteElegida = false, placaBaseElegida = false;
 
@@ -52,7 +49,7 @@ public class Main {
             switch (opcion) {
                 case 1:
                     if (!cpuElegido) {
-                        pc.elegirCPU(scanner, factory);
+                        pc.elegirCPU(scanner, amdFactory, intelFactory);
                         cpuElegido = true;
                     } else {
                         System.out.println("Ya has elegido una CPU.");
@@ -60,7 +57,7 @@ public class Main {
                     break;
                 case 2:
                     if (!gpuElegido) {
-                        pc.elegirGPU(scanner, factory);
+                        pc.elegirGPU(scanner, amdFactory, intelFactory);
                         gpuElegido = true;
                     } else {
                         System.out.println("Ya has elegido una GPU.");
@@ -68,7 +65,7 @@ public class Main {
                     break;
                 case 3:
                     if (!ramElegido) {
-                        pc.elegirRAM(scanner, factory);
+                        pc.elegirRAM(scanner, amdFactory, intelFactory);
                         ramElegido = true;
                     } else {
                         System.out.println("Ya has elegido una RAM.");
@@ -76,7 +73,7 @@ public class Main {
                     break;
                 case 4:
                     if (!ddElegido) {
-                        pc.elegirDiscoDuro(scanner, factory);
+                        pc.elegirDiscoDuro(scanner, amdFactory, intelFactory);
                         ddElegido = true;
                     } else {
                         System.out.println("Ya has elegido un Disco Duro.");
@@ -84,7 +81,7 @@ public class Main {
                     break;
                 case 5:
                     if (!fuenteElegida) {
-                        pc.elegirFuenteAlimentacion(scanner, factory);
+                        pc.elegirFuenteAlimentacion(scanner, amdFactory, intelFactory);
                         fuenteElegida = true;
                     } else {
                         System.out.println("Ya has elegido una Fuente de Alimentación.");
@@ -92,7 +89,7 @@ public class Main {
                     break;
                 case 6:
                     if (!placaBaseElegida) {
-                        pc.elegirPlacaBase(scanner, factory);
+                        pc.elegirPlacaBase(scanner, amdFactory, intelFactory);
                         placaBaseElegida = true;
                     } else {
                         System.out.println("Ya has elegido una Placa Base.");

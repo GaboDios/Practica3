@@ -1,11 +1,10 @@
 import java.util.Scanner;
 
 /**
- * Clase que permite ensamblar una PC interactuando con el usuario.
- * Proporciona metodos para elegir diferentes componentes de la PC
- * y mostrar la configuracion final.
- * 
- * @author Gabo, Pedro Yamil, Isaac (Los Hijos de Korhal)
+ * Clase EnsamblaPC que gestiona el proceso de selección de componentes para armar una PC.
+ * Permite elegir componentes de diferentes marcas (AMD o Intel) y asegura la compatibilidad 
+ * entre CPU y Placa Base mediante el uso de un adaptador si es necesario.
+ * @author Los Hijos de Korhal (Gabo, Pedro, Yamil e Isaac)
  */
 public class EnsamblaPC {
     private CPU cpu;
@@ -16,22 +15,28 @@ public class EnsamblaPC {
     private PlacaBase placaBase;
 
     /**
-     * Constructor para inicializar la clase EnsamblaPC.
-     *
-     * @param factory La fabrica de componentes que se utiliza para crear los componentes.
+     * Constructor por defecto de la clase EnsamblaPC.
+     * Inicialmente no hay componentes seleccionados.
      */
-    public EnsamblaPC(ComponenteFactory factory) {
-        // Inicialmente, ningún componente ha sido seleccionado.
+    public EnsamblaPC() {
+        // Inicialmente, no hay componentes seleccionados.
     }
 
     /**
-     * Permite al usuario elegir una CPU de las opciones disponibles.
-     *
-     * @param scanner El escaner para la entrada del usuario.
-     * @param factory La fabrica de componentes que se utiliza para crear la CPU.
+     * Método para elegir una CPU (AMD o Intel) a partir de una lista proporcionada.
+     * 
+     * @param scanner       Entrada del usuario.
+     * @param amdFactory    Fábrica de componentes AMD.
+     * @param intelFactory  Fábrica de componentes Intel.
      */
-    public void elegirCPU(Scanner scanner, ComponenteFactory factory) {
+    public void elegirCPU(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige una CPU:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             CPU opcion = factory.crearCPU(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -41,13 +46,49 @@ public class EnsamblaPC {
     }
 
     /**
-     * Permite al usuario elegir una GPU de las opciones disponibles.
-     *
-     * @param scanner El escáner para la entrada del usuario.
-     * @param factory La fabrica de componentes que se utiliza para crear la GPU.
+     * Método para elegir una Placa Base (AMD o Intel) y verificar la compatibilidad con la CPU seleccionada.
+     * Si no son compatibles, se utiliza un adaptador para hacerlos compatibles.
+     * @param scanner       Entrada del usuario.
+     * @param amdFactory    Fábrica de componentes AMD.
+     * @param intelFactory  Fábrica de componentes Intel.
      */
-    public void elegirGPU(Scanner scanner, ComponenteFactory factory) {
+    public void elegirPlacaBase(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
+        System.out.println("Elige una Placa Base:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
+        for (int i = 0; i < 5; i++) {
+            PlacaBase opcion = factory.crearPlacaBase(i);
+            System.out.println((i + 1) + ". " + opcion.getDescription());
+        }
+        int placaIndex = scanner.nextInt() - 1;
+        this.placaBase = factory.crearPlacaBase(placaIndex);
+
+        // Verificar compatibilidad y aplicar el Adapter si es necesario
+        if (!cpu.getSocketType().equals(placaBase.getCompatibleSocket())) {
+            System.out.println("CPU y Placa Base no compatibles, aplicando adaptador...");
+            this.cpu = new CPUAdapter(cpu, placaBase.getCompatibleSocket());
+        }
+    }
+
+    /**
+     * Método para elegir una GPU (AMD o Intel) a partir de una lista proporcionada.
+     * 
+     * @param scanner       Entrada del usuario.
+     * @param amdFactory    Fábrica de componentes AMD.
+     * @param intelFactory  Fábrica de componentes Intel.
+     */
+    public void elegirGPU(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige una GPU:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             GPU opcion = factory.crearGPU(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -57,13 +98,20 @@ public class EnsamblaPC {
     }
 
     /**
-     * Permite al usuario elegir una RAM de las opciones disponibles.
-     *
-     * @param scanner El escaner para la entrada del usuario.
-     * @param factory La fabrica de componentes que se utiliza para crear la RAM.
+     * Método para elegir una RAM (AMD o Intel) a partir de una lista proporcionada.
+     * 
+     * @param scanner       Entrada del usuario.
+     * @param amdFactory    Fábrica de componentes AMD.
+     * @param intelFactory  Fábrica de componentes Intel.
      */
-    public void elegirRAM(Scanner scanner, ComponenteFactory factory) {
+    public void elegirRAM(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige una RAM:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             RAM opcion = factory.crearRAM(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -73,13 +121,20 @@ public class EnsamblaPC {
     }
 
     /**
-     * Permite al usuario elegir un disco duro de las opciones disponibles.
-     *
-     * @param scanner El escaner para la entrada del usuario.
-     * @param factory La fabrica de componentes que se utilizara para crear el disco duro.
+     * Método para elegir un Disco Duro (AMD o Intel) a partir de una lista proporcionada.
+     * 
+     * @param scanner       Entrada del usuario.
+     * @param amdFactory    Fábrica de componentes AMD.
+     * @param intelFactory  Fábrica de componentes Intel.
      */
-    public void elegirDiscoDuro(Scanner scanner, ComponenteFactory factory) {
+    public void elegirDiscoDuro(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige un Disco Duro:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             DiscoDuro opcion = factory.crearDiscoDuro(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -89,12 +144,20 @@ public class EnsamblaPC {
     }
 
     /**
-     * Permite al usuario elegir una fuente de alimentación de las opciones disponibles.
-     * @param scanner El escaner para la entrada del usuario.
-     * @param factory La fabrica de componentes que se utilizara para crear la fuente de alimentación.
+     * Método para elegir una Fuente de Alimentación (AMD o Intel) a partir de una lista proporcionada.
+     * 
+     * @param scanner       Entrada del usuario.
+     * @param amdFactory    Fábrica de componentes AMD.
+     * @param intelFactory  Fábrica de componentes Intel.
      */
-    public void elegirFuenteAlimentacion(Scanner scanner, ComponenteFactory factory) {
-        System.out.println("Elige una Fuente de Alimentacion:");
+    public void elegirFuenteAlimentacion(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
+        System.out.println("Elige una Fuente de Alimentación:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             FuenteAlimentacion opcion = factory.crearFuenteAlimentacion(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -104,24 +167,7 @@ public class EnsamblaPC {
     }
 
     /**
-     * Permite al usuario elegir una placa base de las opciones disponibles.
-     *
-     * @param scanner El escaner para la entrada del usuario.
-     * @param factory La fabrica de componentes que se utiliza para crear la placa base.
-     */
-    public void elegirPlacaBase(Scanner scanner, ComponenteFactory factory) {
-        System.out.println("Elige una Placa Base:");
-        for (int i = 0; i < 5; i++) {
-            PlacaBase opcion = factory.crearPlacaBase(i);
-            System.out.println((i + 1) + ". " + opcion.getDescription());
-        }
-        int placaIndex = scanner.nextInt() - 1;
-        this.placaBase = factory.crearPlacaBase(placaIndex);
-    }
-
-    /**
-     * Muestra la configuración final de la PC elegida por el usuario,
-     * incluyendo todos los componentes seleccionados y el precio total.
+     * Método para mostrar la configuración final de la PC ensamblada y calcular el precio total de los componentes.
      */
     public void mostrarConfiguracion() {
         System.out.println("Configuración final de la PC:");
