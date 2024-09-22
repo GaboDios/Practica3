@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class EnsamblaPC {
     private CPU cpu;
     private GPU gpu;
@@ -7,12 +8,18 @@ public class EnsamblaPC {
     private FuenteAlimentacion fuenteAlimentacion;
     private PlacaBase placaBase;
 
-    public EnsamblaPC(ComponenteFactory factory) {
-        // Inicialmente, ningún componente ha sido seleccionado.
+    public EnsamblaPC() {
+        // Inicialmente, no hay componentes seleccionados.
     }
 
-    public void elegirCPU(Scanner scanner, ComponenteFactory factory) {
+    public void elegirCPU(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige una CPU:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             CPU opcion = factory.crearCPU(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -21,8 +28,36 @@ public class EnsamblaPC {
         this.cpu = factory.crearCPU(cpuIndex);
     }
 
-    public void elegirGPU(Scanner scanner, ComponenteFactory factory) {
+    public void elegirPlacaBase(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
+        System.out.println("Elige una Placa Base:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
+        for (int i = 0; i < 5; i++) {
+            PlacaBase opcion = factory.crearPlacaBase(i);
+            System.out.println((i + 1) + ". " + opcion.getDescription());
+        }
+        int placaIndex = scanner.nextInt() - 1;
+        this.placaBase = factory.crearPlacaBase(placaIndex);
+
+        // Verificar compatibilidad y aplicar el Adapter si es necesario
+        if (!cpu.getSocketType().equals(placaBase.getCompatibleSocket())) {
+            System.out.println("CPU y Placa Base no compatibles, aplicando adaptador...");
+            this.cpu = new CPUAdapter(cpu, placaBase.getCompatibleSocket()); // Adaptar la CPU a la Placa Base
+        }
+    }
+
+    public void elegirGPU(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige una GPU:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             GPU opcion = factory.crearGPU(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -31,8 +66,14 @@ public class EnsamblaPC {
         this.gpu = factory.crearGPU(gpuIndex);
     }
 
-    public void elegirRAM(Scanner scanner, ComponenteFactory factory) {
+    public void elegirRAM(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige una RAM:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             RAM opcion = factory.crearRAM(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -41,8 +82,14 @@ public class EnsamblaPC {
         this.ram = factory.crearRAM(ramIndex);
     }
 
-    public void elegirDiscoDuro(Scanner scanner, ComponenteFactory factory) {
+    public void elegirDiscoDuro(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige un Disco Duro:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             DiscoDuro opcion = factory.crearDiscoDuro(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
@@ -51,24 +98,20 @@ public class EnsamblaPC {
         this.discoDuro = factory.crearDiscoDuro(ddIndex);
     }
 
-    public void elegirFuenteAlimentacion(Scanner scanner, ComponenteFactory factory) {
+    public void elegirFuenteAlimentacion(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
         System.out.println("Elige una Fuente de Alimentación:");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int choice = scanner.nextInt();
+
+        ComponenteFactory factory = (choice == 1) ? amdFactory : intelFactory;
+
         for (int i = 0; i < 5; i++) {
             FuenteAlimentacion opcion = factory.crearFuenteAlimentacion(i);
             System.out.println((i + 1) + ". " + opcion.getDescription());
         }
         int fuenteIndex = scanner.nextInt() - 1;
         this.fuenteAlimentacion = factory.crearFuenteAlimentacion(fuenteIndex);
-    }
-
-    public void elegirPlacaBase(Scanner scanner, ComponenteFactory factory) {
-        System.out.println("Elige una Placa Base:");
-        for (int i = 0; i < 5; i++) {
-            PlacaBase opcion = factory.crearPlacaBase(i);
-            System.out.println((i + 1) + ". " + opcion.getDescription());
-        }
-        int placaIndex = scanner.nextInt() - 1;
-        this.placaBase = factory.crearPlacaBase(placaIndex);
     }
 
     public void mostrarConfiguracion() {
