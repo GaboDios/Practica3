@@ -1,6 +1,12 @@
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa una fábrica de componentes AMD.
+ * Implementa la interfaz ComponenteFactory.
+ * 
+ * @author Gabo, Pedro Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class AMDFactory implements ComponenteFactory {
     private List<CPU> cpus = new ArrayList<>();
     private List<GPU> gpus = new ArrayList<>();
@@ -9,6 +15,9 @@ public class AMDFactory implements ComponenteFactory {
     private List<FuenteAlimentacion> fuentes = new ArrayList<>();
     private List<PlacaBase> placasBases = new ArrayList<>();
 
+    /**
+     * Constructor que inicializa la fábrica con opciones predeterminadas de componentes AMD.
+     */
     public AMDFactory() {
         // Inicializar con 5 opciones de CPU
         cpus.add(new AMDCPU("AMD Ryzen 9", 450.0, "AMD", "AM4", 3.7));
@@ -45,16 +54,20 @@ public class AMDFactory implements ComponenteFactory {
         fuentes.add(new AMDFuenteAlimentacion("Cooler Master MWE Gold 550", 75.0, "Cooler Master", 550, "80 Plus Gold"));
         fuentes.add(new AMDFuenteAlimentacion("Thermaltake Smart 500W", 50.0, "Thermaltake", 500, "80 Plus"));
 
-
         // Inicializar con 5 opciones de Placas Base
         placasBases.add(new AMDPlacaBase("ASUS ROG Strix X570-E", 300.0, "ASUS", "ATX", "X570", "AM4"));
         placasBases.add(new AMDPlacaBase("MSI MAG B550 Tomahawk", 180.0, "MSI", "ATX", "B550", "AM4"));
         placasBases.add(new AMDPlacaBase("Gigabyte AORUS X570 Elite", 200.0, "Gigabyte", "ATX", "X570", "AM4"));
         placasBases.add(new AMDPlacaBase("ASRock B450M Steel Legend", 100.0, "ASRock", "Micro-ATX", "B450", "AM4"));
         placasBases.add(new AMDPlacaBase("ASUS TUF Gaming B550-PLUS", 160.0, "ASUS", "ATX", "B550", "AM4"));
-
     }
 
+    /**
+     * Crea una CPU a partir del índice especificado.
+     *
+     * @param index El índice de la CPU a crear.
+     * @return La CPU correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public CPU crearCPU(int index) {
         if (index >= 0 && index < cpus.size()) {
@@ -63,6 +76,12 @@ public class AMDFactory implements ComponenteFactory {
         return cpus.get(0);  // Retorna la primera opción si el índice es inválido
     }
 
+    /**
+     * Crea una GPU a partir del índice especificado.
+     *
+     * @param index El índice de la GPU a crear.
+     * @return La GPU correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public GPU crearGPU(int index) {
         if (index >= 0 && index < gpus.size()) {
@@ -71,6 +90,12 @@ public class AMDFactory implements ComponenteFactory {
         return gpus.get(0);
     }
 
+    /**
+     * Crea una RAM a partir del índice especificado.
+     *
+     * @param index El índice de la RAM a crear.
+     * @return La RAM correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public RAM crearRAM(int index) {
         if (index >= 0 && index < rams.size()) {
@@ -79,6 +104,12 @@ public class AMDFactory implements ComponenteFactory {
         return rams.get(0);
     }
 
+    /**
+     * Crea un disco duro a partir del índice especificado.
+     *
+     * @param index El índice del disco duro a crear.
+     * @return El disco duro correspondiente al índice, o el primer opción si el índice es inválido.
+     */
     @Override
     public DiscoDuro crearDiscoDuro(int index) {
         if (index >= 0 && index < discosDuros.size()) {
@@ -87,6 +118,12 @@ public class AMDFactory implements ComponenteFactory {
         return discosDuros.get(0);
     }
 
+    /**
+     * Crea una fuente de alimentación a partir del índice especificado.
+     *
+     * @param index El índice de la fuente de alimentación a crear.
+     * @return La fuente de alimentación correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public FuenteAlimentacion crearFuenteAlimentacion(int index) {
         if (index >= 0 && index < fuentes.size()) {
@@ -95,6 +132,12 @@ public class AMDFactory implements ComponenteFactory {
         return fuentes.get(0);
     }
 
+    /**
+     * Crea una placa base a partir del índice especificado.
+     *
+     * @param index El índice de la placa base a crear.
+     * @return La placa base correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public PlacaBase crearPlacaBase(int index) {
         if (index >= 0 && index < placasBases.size()) {
