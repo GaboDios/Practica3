@@ -1,6 +1,6 @@
 public class CPUAdapter implements CPU {
-    private CPU incompatibleCPU;  // La CPU incompatible que queremos adaptar
-    private String targetSocket;  // El socket de destino con el que queremos hacerla compatible
+    private CPU incompatibleCPU;
+    private String targetSocket;  // El socket al que se adapta la CPU
 
     public CPUAdapter(CPU incompatibleCPU, String targetSocket) {
         this.incompatibleCPU = incompatibleCPU;
@@ -9,12 +9,17 @@ public class CPUAdapter implements CPU {
 
     @Override
     public String getSocketType() {
-        return targetSocket;  // Adaptamos el tipo de socket para que sea compatible
+        return targetSocket;  // Adaptar el socket para que sea compatible
     }
 
     @Override
     public String getDescription() {
-        // Retornamos la descripción de la CPU adaptada, indicando que fue adaptada
-        return incompatibleCPU.getDescription() + " (Adaptada a socket: " + targetSocket + ")";
+        return incompatibleCPU.getDescription() + " (Adaptado a socket: " + targetSocket + ")";
+    }
+
+    @Override
+    public double getPrecio() {
+        // Delegar el método getPrecio al objeto CPU que está siendo adaptado
+        return incompatibleCPU.getPrecio();
     }
 }
