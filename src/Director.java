@@ -1,18 +1,20 @@
 public class Director {
-    private PCBuilder builder;
+    private PCBuilder pcBuilder;
 
-    public Director(PCBuilder builder) {
-        this.builder = builder;
+    public Director(PCBuilder pcBuilder) {
+        this.pcBuilder = pcBuilder;
     }
 
-    // Método para construir una PC completa
-    public PC construirPC(CPU cpu, GPU gpu, RAM ram, DiscoDuro discoDuro, FuenteAlimentacion fuenteAlimentacion, PlacaBase placaBase) {
-        builder.addCPU(cpu);
-        builder.addGPU(gpu);
-        builder.addRAM(ram);
-        builder.addDiscoDuro(discoDuro);
-        builder.addFuenteAlimentacion(fuenteAlimentacion);
-        builder.addPlacaBase(placaBase);
-        return builder.build(); // Retorna la PC construida
+    public void construirPC() {
+        pcBuilder.construirCPU();
+        pcBuilder.construirGPU();
+        pcBuilder.construirRAM();
+        pcBuilder.construirDiscoDuro();
+        pcBuilder.construirFuenteAlimentacion();
+        pcBuilder.construirPlacaBase();
+    }
+
+    public PC getPC() {
+        return pcBuilder.getPC();
     }
 }

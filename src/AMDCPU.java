@@ -5,13 +5,15 @@ public class AMDCPU implements CPU, Componente {
     private String tipoComponente = "CPU";
     private String socket;
     private double frecuencia;  // Frecuencia específica de la CPU
+    private String gama;  // Atributo para la gama
 
-    public AMDCPU(String nombre, double precio, String marca, String socket, double frecuencia) {
+    public AMDCPU(String nombre, double precio, String marca, String socket, double frecuencia, String gama) {
         this.nombre = nombre;
         this.precio = precio;
         this.marca = marca;
         this.socket = socket;
         this.frecuencia = frecuencia;
+        this.gama = gama;
     }
 
     @Override
@@ -42,5 +44,10 @@ public class AMDCPU implements CPU, Componente {
     @Override
     public String getDescription() {
         return nombre + " - " + marca + " - Frecuencia: " + frecuencia + " GHz - Precio: $" + precio;
+    }
+
+    @Override
+    public  String getGama(){
+        return gama;
     }
 }

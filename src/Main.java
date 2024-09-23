@@ -8,22 +8,39 @@ public class Main {
         ComponenteFactory intelFactory = new IntelFactory();
         EnsamblaPC pc = new EnsamblaPC();
 
+        // Menú principal con nuevas opciones
         System.out.println("Bienvenido, ¿qué tipo de computadora deseas ensamblar?");
         System.out.println("1. AMD");
         System.out.println("2. Intel");
         System.out.println("3. Personalizada (Componentes AMD e Intel)");
+        System.out.println("4. PC para Oficina");
+        System.out.println("5. PC Gaming");
 
         int choice = scanner.nextInt();
+        boolean esPersonalizada = false;
+
 
         switch (choice) {
             case 1:
-                ensamblarPC(scanner, pc, amdFactory, amdFactory);  // Solo componentes AMD
+                pc.elegirGama(scanner);  // Elige la gama antes de seleccionar componentes
+                ensamblarPC(scanner, pc, amdFactory, amdFactory, esPersonalizada);  // Solo componentes AMD
                 break;
             case 2:
-                ensamblarPC(scanner, pc, intelFactory, intelFactory);  // Solo componentes Intel
+                pc.elegirGama(scanner);  // Elige la gama antes de seleccionar componentes
+                ensamblarPC(scanner, pc, intelFactory, intelFactory, esPersonalizada);  // Solo componentes Intel
                 break;
             case 3:
-                ensamblarPC(scanner, pc, amdFactory, intelFactory);  // Componentes de AMD e Intel
+                pc.elegirGama(scanner);  // Elige la gama antes de seleccionar componentes
+                esPersonalizada = true;
+                ensamblarPC(scanner, pc, amdFactory, intelFactory, esPersonalizada);  // Componentes de AMD e Intel
+                break;
+            case 4:
+                // Opción para PC de Oficina
+                elegirPCOficina(scanner, amdFactory, intelFactory);  // Configuración predeterminada de oficina
+                break;
+            case 5:
+                // Opción para PC Gaming
+                elegirPCGaming(scanner, amdFactory, intelFactory);  // Configuración predeterminada de gaming
                 break;
             default:
                 System.out.println("Opción no válida.");
@@ -31,7 +48,46 @@ public class Main {
         }
     }
 
-    public static void ensamblarPC(Scanner scanner, EnsamblaPC pc, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
+    public static void elegirPCOficina(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
+        System.out.println("Has elegido ensamblar una PC de Oficina.");
+        System.out.println("¿Qué marca prefieres?");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int marcaChoice = scanner.nextInt();
+
+        ComponenteFactory factory = (marcaChoice == 1) ? amdFactory : intelFactory;
+        OficinaPCBuilder oficinaBuilder = new OficinaPCBuilder(factory);
+        Director director = new Director(oficinaBuilder);
+        director.construirPC();  // Ensambla la PC
+
+        // Mostrar configuración final
+        PC pcOficina = director.getPC();  // Obtener la PC ensamblada
+        pcOficina.mostrarConfiguracion();
+    }
+
+
+
+    public static void elegirPCGaming(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory) {
+        System.out.println("Has elegido ensamblar una PC Gaming.");
+        System.out.println("¿Qué marca prefieres?");
+        System.out.println("1. AMD");
+        System.out.println("2. Intel");
+        int marcaChoice = scanner.nextInt();
+
+        ComponenteFactory factory = (marcaChoice == 1) ? amdFactory : intelFactory;
+        GamingPCBuilder gamingBuilder = new GamingPCBuilder(factory);
+        Director director = new Director(gamingBuilder);
+        director.construirPC();  // Ensambla la PC
+
+        // Mostrar configuración final
+        PC pcGaming = director.getPC();  // Obtener la PC ensamblada
+        pcGaming.mostrarConfiguracion();
+    }
+
+
+
+    // Método para ensamblar una PC personalizada
+    public static void ensamblarPC(Scanner scanner, EnsamblaPC pc, ComponenteFactory amdFactory, ComponenteFactory intelFactory, boolean esPersonalizada) {
         boolean salir = false;
         boolean cpuElegido = false, gpuElegido = false, ramElegido = false, ddElegido = false, fuenteElegida = false, placaBaseElegida = false;
 
@@ -49,7 +105,7 @@ public class Main {
             switch (opcion) {
                 case 1:
                     if (!cpuElegido) {
-                        pc.elegirCPU(scanner, amdFactory, intelFactory);
+                        pc.elegirCPU(scanner, amdFactory, intelFactory, esPersonalizada);
                         cpuElegido = true;
                     } else {
                         System.out.println("Ya has elegido una CPU.");
@@ -57,7 +113,7 @@ public class Main {
                     break;
                 case 2:
                     if (!gpuElegido) {
-                        pc.elegirGPU(scanner, amdFactory, intelFactory);
+                        pc.elegirGPU(scanner, amdFactory, intelFactory, esPersonalizada);
                         gpuElegido = true;
                     } else {
                         System.out.println("Ya has elegido una GPU.");
@@ -65,7 +121,7 @@ public class Main {
                     break;
                 case 3:
                     if (!ramElegido) {
-                        pc.elegirRAM(scanner, amdFactory, intelFactory);
+                        pc.elegirRAM(scanner, amdFactory, intelFactory, esPersonalizada);
                         ramElegido = true;
                     } else {
                         System.out.println("Ya has elegido una RAM.");
@@ -73,7 +129,7 @@ public class Main {
                     break;
                 case 4:
                     if (!ddElegido) {
-                        pc.elegirDiscoDuro(scanner, amdFactory, intelFactory);
+                        pc.elegirDiscoDuro(scanner, amdFactory, intelFactory, esPersonalizada);
                         ddElegido = true;
                     } else {
                         System.out.println("Ya has elegido un Disco Duro.");
@@ -81,7 +137,7 @@ public class Main {
                     break;
                 case 5:
                     if (!fuenteElegida) {
-                        pc.elegirFuenteAlimentacion(scanner, amdFactory, intelFactory);
+                        pc.elegirFuenteAlimentacion(scanner, amdFactory, intelFactory, esPersonalizada);
                         fuenteElegida = true;
                     } else {
                         System.out.println("Ya has elegido una Fuente de Alimentación.");
@@ -89,7 +145,7 @@ public class Main {
                     break;
                 case 6:
                     if (!placaBaseElegida) {
-                        pc.elegirPlacaBase(scanner, amdFactory, intelFactory);
+                        pc.elegirPlacaBase(scanner, amdFactory, intelFactory, esPersonalizada);
                         placaBaseElegida = true;
                     } else {
                         System.out.println("Ya has elegido una Placa Base.");

@@ -22,4 +22,10 @@ public class CPUAdapter implements CPU {
         // Delegar el método getPrecio al objeto CPU que está siendo adaptado
         return incompatibleCPU.getPrecio();
     }
+
+    @Override
+    public String getGama() {
+        // Delegar el método getGama al CPU original
+        return incompatibleCPU.getGama();
+    }
 }

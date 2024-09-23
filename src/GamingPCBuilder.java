@@ -1,42 +1,36 @@
-public class GamingPCBuilder implements PCBuilder {
-    private PC pc;
+public class GamingPCBuilder extends PCBuilder {
 
-    public GamingPCBuilder() {
-        this.pc = new PC(); // Inicializamos una nueva PC vacía
+    public GamingPCBuilder(ComponenteFactory factory) {
+        super(factory);
     }
 
     @Override
-    public void addCPU(CPU cpu) {
-        pc.setCPU(cpu);
+    public void construirCPU() {
+        pc.setCPU(factory.crearCPU(1));  // Usa la fábrica para crear una CPU de gama alta
     }
 
     @Override
-    public void addGPU(GPU gpu) {
-        pc.setGPU(gpu);
+    public void construirGPU() {
+        pc.setGPU(factory.crearGPU(1));  // Usa la fábrica para crear una GPU de gama alta
     }
 
     @Override
-    public void addRAM(RAM ram) {
-        pc.setRAM(ram);
+    public void construirRAM() {
+        pc.setRAM(factory.crearRAM(1));  // Usa la fábrica para crear una RAM de gama alta
     }
 
     @Override
-    public void addDiscoDuro(DiscoDuro discoDuro) {
-        pc.setDiscoDuro(discoDuro);
+    public void construirDiscoDuro() {
+        pc.setDiscoDuro(factory.crearDiscoDuro(1));  // Usa la fábrica para crear un Disco Duro de gama alta
     }
 
     @Override
-    public void addFuenteAlimentacion(FuenteAlimentacion fuenteAlimentacion) {
-        pc.setFuenteAlimentacion(fuenteAlimentacion);
+    public void construirFuenteAlimentacion() {
+        pc.setFuenteAlimentacion(factory.crearFuenteAlimentacion(1));  // Usa la fábrica para crear una fuente de gama alta
     }
 
     @Override
-    public void addPlacaBase(PlacaBase placaBase) {
-        pc.setPlacaBase(placaBase);
-    }
-
-    @Override
-    public PC build() {
-        return pc; // Retorna la PC completamente construida
+    public void construirPlacaBase() {
+        pc.setPlacaBase(factory.crearPlacaBase(1));  // Usa la fábrica para crear una placa base de gama alta
     }
 }

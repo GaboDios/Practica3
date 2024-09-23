@@ -5,13 +5,15 @@ public class IntelDiscoDuro implements DiscoDuro, Componente {
     private String tipoComponente = "Disco Duro";
     private int capacidad;
     private String tipoAlmacenamiento; // HDD o SSD
+    private String gama;
 
-    public IntelDiscoDuro(String nombre, double precio, String marca, int capacidad, String tipoAlmacenamiento) {
+    public IntelDiscoDuro(String nombre, double precio, String marca, int capacidad, String tipoAlmacenamiento, String gama) {
         this.nombre = nombre;
         this.precio = precio;
         this.marca = marca;
         this.capacidad = capacidad;
         this.tipoAlmacenamiento = tipoAlmacenamiento;
+        this.gama = gama;
     }
 
     @Override
@@ -37,5 +39,10 @@ public class IntelDiscoDuro implements DiscoDuro, Componente {
     @Override
     public String getDescription() {
         return nombre + " - " + marca + " - Capacidad: " + capacidad + "GB - Tipo: " + tipoAlmacenamiento + " - Precio: $" + precio;
+    }
+
+    @Override
+    public String getGama() {
+        return gama;
     }
 }

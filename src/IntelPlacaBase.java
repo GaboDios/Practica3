@@ -6,14 +6,16 @@ public class IntelPlacaBase implements PlacaBase, Componente {
     private String formato;
     private String chipset;
     private String compatibleSocket; // Añadimos el socket compatible
+    private String gama;
 
-    public IntelPlacaBase(String nombre, double precio, String marca, String formato, String chipset, String compatibleSocket) {
+    public IntelPlacaBase(String nombre, double precio, String marca, String formato, String chipset, String compatibleSocket, String gama) {
         this.nombre = nombre;
         this.precio = precio;
         this.marca = marca;
         this.formato = formato;
         this.chipset = chipset;
         this.compatibleSocket = compatibleSocket; // Inicializamos el socket compatible
+        this.gama = gama;
     }
 
     @Override
@@ -44,5 +46,10 @@ public class IntelPlacaBase implements PlacaBase, Componente {
     @Override
     public String getDescription() {
         return nombre + " - " + marca + " - Formato: " + formato + " - Chipset: " + chipset + " - Socket: " + compatibleSocket + " - Precio: $" + precio;
+    }
+
+    @Override
+    public String getGama() {
+        return gama;
     }
 }

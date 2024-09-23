@@ -5,13 +5,15 @@ public class AMDRAM implements RAM, Componente {
     private String tipoComponente = "RAM";
     private int capacidad; // Capacidad de RAM en GB
     private String tipoMemoria; // DDR4, DDR5, etc.
+    private String gama;
 
-    public AMDRAM(String nombre, double precio, String marca, int capacidad, String tipoMemoria) {
+    public AMDRAM(String nombre, double precio, String marca, int capacidad, String tipoMemoria, String gama) {
         this.nombre = nombre;
         this.precio = precio;
         this.marca = marca;
         this.capacidad = capacidad;
         this.tipoMemoria = tipoMemoria;
+        this.gama = gama;
     }
 
     @Override
@@ -37,5 +39,10 @@ public class AMDRAM implements RAM, Componente {
     @Override
     public String getDescription() {
         return nombre + " - " + marca + " - Capacidad: " + capacidad + "GB - Tipo: " + tipoMemoria + " - Precio: $" + precio;
+    }
+
+    @Override
+    public  String getGama(){
+        return gama;
     }
 }

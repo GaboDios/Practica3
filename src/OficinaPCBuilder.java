@@ -1,42 +1,36 @@
-public class OficinaPCBuilder implements PCBuilder {
-    private PC pc;
+public class OficinaPCBuilder extends PCBuilder {
 
-    public OficinaPCBuilder() {
-        this.pc = new PC(); // Inicializamos una nueva PC vacía
+    public OficinaPCBuilder(ComponenteFactory factory) {
+        super(factory);
     }
 
     @Override
-    public void addCPU(CPU cpu) {
-        pc.setCPU(cpu);
+    public void construirCPU() {
+        pc.setCPU(factory.crearCPU(2));  // Usa la fábrica para crear una CPU de gama media
     }
 
     @Override
-    public void addGPU(GPU gpu) {
-        pc.setGPU(gpu);
+    public void construirGPU() {
+        pc.setGPU(factory.crearGPU(2));  // Usa la fábrica para crear una GPU de gama media
     }
 
     @Override
-    public void addRAM(RAM ram) {
-        pc.setRAM(ram);
+    public void construirRAM() {
+        pc.setRAM(factory.crearRAM(2));  // Usa la fábrica para crear una RAM de gama media
     }
 
     @Override
-    public void addDiscoDuro(DiscoDuro discoDuro) {
-        pc.setDiscoDuro(discoDuro);
+    public void construirDiscoDuro() {
+        pc.setDiscoDuro(factory.crearDiscoDuro(2));  // Usa la fábrica para crear un Disco Duro de gama media
     }
 
     @Override
-    public void addFuenteAlimentacion(FuenteAlimentacion fuenteAlimentacion) {
-        pc.setFuenteAlimentacion(fuenteAlimentacion);
+    public void construirFuenteAlimentacion() {
+        pc.setFuenteAlimentacion(factory.crearFuenteAlimentacion(2));  // Usa la fábrica para crear una fuente de gama media
     }
 
     @Override
-    public void addPlacaBase(PlacaBase placaBase) {
-        pc.setPlacaBase(placaBase);
-    }
-
-    @Override
-    public PC build() {
-        return pc; // Retorna la PC completamente construida
+    public void construirPlacaBase() {
+        pc.setPlacaBase(factory.crearPlacaBase(2));  // Usa la fábrica para crear una placa base de gama media
     }
 }

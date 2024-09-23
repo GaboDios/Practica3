@@ -5,13 +5,15 @@ public class IntelGPU implements GPU, Componente {
     private String tipoComponente = "GPU";
     private String tipoMemoria;
     private String puertosSalida;  // HDMI, DisplayPort, etc.
+    private String gama;
 
-    public IntelGPU(String nombre, double precio, String marca, String tipoMemoria, String puertosSalida) {
+    public IntelGPU(String nombre, double precio, String marca, String tipoMemoria, String puertosSalida, String gama) {
         this.nombre = nombre;
         this.precio = precio;
         this.marca = marca;
         this.tipoMemoria = tipoMemoria;
         this.puertosSalida = puertosSalida;
+        this.gama = gama;
     }
 
     @Override
@@ -37,5 +39,10 @@ public class IntelGPU implements GPU, Componente {
     @Override
     public String getDescription() {
         return nombre + " - " + marca + " - Tipo Memoria: " + tipoMemoria + " - Puertos: " + puertosSalida + " - Precio: $" + precio;
+    }
+
+    @Override
+    public String getGama() {
+        return gama;
     }
 }
