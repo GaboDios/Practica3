@@ -1,6 +1,14 @@
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ * Clase que permite al usuario ensamblar una PC seleccionando componentes de diferentes gamas
+ * y fabricantes. Ofrece opciones para CPU, GPU, RAM, disco duro, fuente de alimentación y
+ * placa base, verificando compatibilidad entre ellos y permitiendo personalización.
+ * También muestra la configuración final de la PC ensamblada.
+ *
+ * @autor Gabo, Pedro, Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class EnsamblaPC {
     private CPU cpu;
     private GPU gpu;
@@ -10,10 +18,19 @@ public class EnsamblaPC {
     private PlacaBase placaBase;
     private String gamaSeleccionada;
 
+    /**
+     * Constructor de EnsamblaPC.
+     * Inicializa la clase sin componentes seleccionados inicialmente.
+     */
     public EnsamblaPC() {
         // Inicialmente, no hay componentes seleccionados.
     }
 
+    /**
+     * Permite al usuario seleccionar la gama de componentes (alta, media, baja).
+     *
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     */
     public void elegirGama(Scanner scanner) {
         System.out.println("Elige la gama de componentes:");
         System.out.println("1. Alta");
@@ -42,6 +59,15 @@ public class EnsamblaPC {
         }
     }
 
+    /**
+     * Permite al usuario seleccionar una CPU, ya sea de AMD o Intel,
+     * dependiendo de si la PC es personalizada o no.
+     *
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     * @param amdFactory Fábrica de componentes AMD.
+     * @param intelFactory Fábrica de componentes Intel.
+     * @param esPersonalizada Indica si la PC es personalizada o predefinida.
+     */
     public void elegirCPU(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory, boolean esPersonalizada) {
         if (esPersonalizada) {
             System.out.println("Elige una CPU:");
@@ -56,6 +82,13 @@ public class EnsamblaPC {
         }
     }
 
+    /**
+     * Muestra al usuario las opciones de CPUs disponibles según la gama seleccionada
+     * y permite al usuario seleccionar una.
+     *
+     * @param factory La fábrica de donde se obtendrán las CPUs.
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     */
     private void mostrarOpcionesCPU(ComponenteFactory factory, Scanner scanner) {
         List<CPU> cpusDisponibles = factory.getCPUsPorGama(gamaSeleccionada);
         for (int i = 0; i < cpusDisponibles.size(); i++) {
@@ -72,7 +105,15 @@ public class EnsamblaPC {
         this.cpu = cpusDisponibles.get(cpuIndex);
     }
 
-
+    /**
+     * Permite al usuario seleccionar una GPU, ya sea de AMD o Intel,
+     * dependiendo de si la PC es personalizada o no.
+     *
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     * @param amdFactory Fábrica de componentes AMD.
+     * @param intelFactory Fábrica de componentes Intel.
+     * @param esPersonalizada Indica si la PC es personalizada o predefinida.
+     */
     public void elegirGPU(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory, boolean esPersonalizada) {
         if (esPersonalizada) {
             System.out.println("Elige una GPU:");
@@ -86,6 +127,13 @@ public class EnsamblaPC {
         }
     }
 
+    /**
+     * Muestra al usuario las opciones de GPUs disponibles según la gama seleccionada
+     * y permite al usuario seleccionar una.
+     *
+     * @param factory La fábrica de donde se obtendrán las GPUs.
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     */
     private void mostrarOpcionesGPU(ComponenteFactory factory, Scanner scanner) {
         List<GPU> gpusDisponibles = factory.getGPUsPorGama(gamaSeleccionada);
         for (int i = 0; i < gpusDisponibles.size(); i++) {
@@ -102,7 +150,15 @@ public class EnsamblaPC {
         this.gpu = gpusDisponibles.get(gpuIndex);
     }
 
-
+    /**
+     * Permite al usuario seleccionar una RAM, ya sea de AMD o Intel,
+     * dependiendo de si la PC es personalizada o no.
+     *
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     * @param amdFactory Fábrica de componentes AMD.
+     * @param intelFactory Fábrica de componentes Intel.
+     * @param esPersonalizada Indica si la PC es personalizada o predefinida.
+     */
     public void elegirRAM(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory, boolean esPersonalizada) {
         if (esPersonalizada) {
             System.out.println("Elige una RAM:");
@@ -116,6 +172,13 @@ public class EnsamblaPC {
         }
     }
 
+    /**
+     * Muestra al usuario las opciones de RAMs disponibles según la gama seleccionada
+     * y permite al usuario seleccionar una.
+     *
+     * @param factory La fábrica de donde se obtendrán las RAMs.
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     */
     private void mostrarOpcionesRAM(ComponenteFactory factory, Scanner scanner) {
         List<RAM> ramsDisponibles = factory.getRAMsPorGama(gamaSeleccionada);
         for (int i = 0; i < ramsDisponibles.size(); i++) {
@@ -126,6 +189,15 @@ public class EnsamblaPC {
         this.ram = ramsDisponibles.get(ramIndex);
     }
 
+    /**
+     * Permite al usuario seleccionar un disco duro, ya sea de AMD o Intel,
+     * dependiendo de si la PC es personalizada o no.
+     *
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     * @param amdFactory Fábrica de componentes AMD.
+     * @param intelFactory Fábrica de componentes Intel.
+     * @param esPersonalizada Indica si la PC es personalizada o predefinida.
+     */
     public void elegirDiscoDuro(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory, boolean esPersonalizada) {
         if (esPersonalizada) {
             System.out.println("Elige un Disco Duro:");
@@ -139,6 +211,13 @@ public class EnsamblaPC {
         }
     }
 
+    /**
+     * Muestra al usuario las opciones de discos duros disponibles según la gama seleccionada
+     * y permite al usuario seleccionar uno.
+     *
+     * @param factory La fábrica de donde se obtendrán los discos duros.
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     */
     private void mostrarOpcionesDiscoDuro(ComponenteFactory factory, Scanner scanner) {
         List<DiscoDuro> discosDisponibles = factory.getDiscosDurosPorGama(gamaSeleccionada);
         for (int i = 0; i < discosDisponibles.size(); i++) {
@@ -149,6 +228,15 @@ public class EnsamblaPC {
         this.discoDuro = discosDisponibles.get(ddIndex);
     }
 
+    /**
+     * Permite al usuario seleccionar una fuente de alimentación, ya sea de AMD o Intel,
+     * dependiendo de si la PC es personalizada o no.
+     *
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     * @param amdFactory Fábrica de componentes AMD.
+     * @param intelFactory Fábrica de componentes Intel.
+     * @param esPersonalizada Indica si la PC es personalizada o predefinida.
+     */
     public void elegirFuenteAlimentacion(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory, boolean esPersonalizada) {
         if (esPersonalizada) {
             System.out.println("Elige una Fuente de Alimentación:");
@@ -162,6 +250,13 @@ public class EnsamblaPC {
         }
     }
 
+    /**
+     * Muestra al usuario las opciones de fuentes de alimentación disponibles según la gama seleccionada
+     * y permite al usuario seleccionar una.
+     *
+     * @param factory La fábrica de donde se obtendrán las fuentes de alimentación.
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     */
     private void mostrarOpcionesFuenteAlimentacion(ComponenteFactory factory, Scanner scanner) {
         List<FuenteAlimentacion> fuentesDisponibles = factory.getFuentesPorGama(gamaSeleccionada);
         for (int i = 0; i < fuentesDisponibles.size(); i++) {
@@ -172,6 +267,15 @@ public class EnsamblaPC {
         this.fuenteAlimentacion = fuentesDisponibles.get(fuenteIndex);
     }
 
+    /**
+     * Permite al usuario seleccionar una placa base, ya sea de AMD o Intel,
+     * dependiendo de si la PC es personalizada o no.
+     *
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     * @param amdFactory Fábrica de componentes AMD.
+     * @param intelFactory Fábrica de componentes Intel.
+     * @param esPersonalizada Indica si la PC es personalizada o predefinida.
+     */
     public void elegirPlacaBase(Scanner scanner, ComponenteFactory amdFactory, ComponenteFactory intelFactory, boolean esPersonalizada) {
         if (esPersonalizada) {
             System.out.println("Elige una Placa Base:");
@@ -185,6 +289,15 @@ public class EnsamblaPC {
         }
     }
 
+    /**
+     * Muestra al usuario las opciones de placas base disponibles según la gama seleccionada
+     * y permite al usuario seleccionar una.
+     * También verifica la compatibilidad entre la CPU y la placa base,
+     * aplicando el patrón Adapter si es necesario.
+     *
+     * @param factory La fábrica de donde se obtendrán las placas base.
+     * @param scanner Objeto Scanner para capturar la entrada del usuario.
+     */
     private void mostrarOpcionesPlacaBase(ComponenteFactory factory, Scanner scanner) {
         List<PlacaBase> placasDisponibles = factory.getPlacasBasePorGama(gamaSeleccionada);
         for (int i = 0; i < placasDisponibles.size(); i++) {
@@ -194,14 +307,16 @@ public class EnsamblaPC {
         int placaIndex = scanner.nextInt() - 1;
         this.placaBase = placasDisponibles.get(placaIndex);
 
-        // Verificar compatibilidad y aplicar el Adapter si es necesario
         if (!cpu.getSocketType().equals(placaBase.getCompatibleSocket())) {
             System.out.println("CPU y Placa Base no compatibles, aplicando adaptador...");
-            this.cpu = new CPUAdapter(cpu, placaBase.getCompatibleSocket()); // Adaptar la CPU a la Placa Base
+            this.cpu = new CPUAdapter(cpu, placaBase.getCompatibleSocket());
         }
     }
 
-    // Método para mostrar la configuración final de la PC
+    /**
+     * Muestra la configuración final de la PC ensamblada, incluyendo
+     * los componentes seleccionados y el precio total.
+     */
     public void mostrarConfiguracion() {
         System.out.println("Configuracion final de la PC:");
         System.out.println("CPU: " + cpu.getDescription());

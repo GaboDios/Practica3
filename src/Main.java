@@ -58,10 +58,9 @@ public class Main {
         ComponenteFactory factory = (marcaChoice == 1) ? amdFactory : intelFactory;
         OficinaPCBuilder oficinaBuilder = new OficinaPCBuilder(factory);
         Director director = new Director(oficinaBuilder);
-        director.construirPC();  // Ensambla la PC
+        director.construirPC();
 
-        // Mostrar configuración final
-        PC pcOficina = director.getPC();  // Obtener la PC ensamblada
+        PC pcOficina = director.getPC();
         pcOficina.mostrarConfiguracion();
     }
 
@@ -77,10 +76,9 @@ public class Main {
         ComponenteFactory factory = (marcaChoice == 1) ? amdFactory : intelFactory;
         GamingPCBuilder gamingBuilder = new GamingPCBuilder(factory);
         Director director = new Director(gamingBuilder);
-        director.construirPC();  // Ensambla la PC
+        director.construirPC();
 
-        // Mostrar configuración final
-        PC pcGaming = director.getPC();  // Obtener la PC ensamblada
+        PC pcGaming = director.getPC();
         pcGaming.mostrarConfiguracion();
     }
 
