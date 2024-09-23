@@ -1,6 +1,12 @@
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Clase que representa una fábrica de componentes AMD.
+ * Implementa la interfaz ComponenteFactory.
+ *
+ * @author Gabo, Pedro Yamil, Isaac (Los Hijos de Korhal)
+ */
 public class AMDFactory implements ComponenteFactory {
     private List<CPU> cpus = new ArrayList<>();
     private List<GPU> gpus = new ArrayList<>();
@@ -9,6 +15,9 @@ public class AMDFactory implements ComponenteFactory {
     private List<FuenteAlimentacion> fuentes = new ArrayList<>();
     private List<PlacaBase> placasBases = new ArrayList<>();
 
+    /**
+     * Constructor que inicializa la fábrica con opciones predeterminadas de componentes AMD.
+     */
     public AMDFactory() {
         // Inicializar con 5 opciones de CPU
         cpus.add(new AMDCPU("AMD Ryzen 9", 450.0, "AMD", "AM4", 3.7, "alta"));
@@ -53,7 +62,12 @@ public class AMDFactory implements ComponenteFactory {
         placasBases.add(new AMDPlacaBase("ASUS TUF Gaming B550-PLUS", 160.0, "ASUS", "ATX", "B550", "AM4", "media"));
     }
 
-    // Métodos para crear los componentes
+    /**
+     * Crea una CPU a partir del índice especificado.
+     *
+     * @param index El índice de la CPU a crear.
+     * @return La CPU correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public CPU crearCPU(int index) {
         if (index >= 0 && index < cpus.size()) {
@@ -62,6 +76,12 @@ public class AMDFactory implements ComponenteFactory {
         return cpus.get(0);  // Retorna la primera opción si el índice es inválido
     }
 
+    /**
+     * Crea una GPU a partir del índice especificado.
+     *
+     * @param index El índice de la GPU a crear.
+     * @return La GPU correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public GPU crearGPU(int index) {
         if (index >= 0 && index < gpus.size()) {
@@ -70,6 +90,12 @@ public class AMDFactory implements ComponenteFactory {
         return gpus.get(0);
     }
 
+    /**
+     * Crea una RAM a partir del índice especificado.
+     *
+     * @param index El índice de la RAM a crear.
+     * @return La RAM correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public RAM crearRAM(int index) {
         if (index >= 0 && index < rams.size()) {
@@ -78,6 +104,12 @@ public class AMDFactory implements ComponenteFactory {
         return rams.get(0);
     }
 
+    /**
+     * Crea un disco duro a partir del índice especificado.
+     *
+     * @param index El índice del disco duro a crear.
+     * @return El disco duro correspondiente al índice, o el primer opción si el índice es inválido.
+     */
     @Override
     public DiscoDuro crearDiscoDuro(int index) {
         if (index >= 0 && index < discosDuros.size()) {
@@ -86,6 +118,12 @@ public class AMDFactory implements ComponenteFactory {
         return discosDuros.get(0);
     }
 
+    /**
+     * Crea una fuente de alimentación a partir del índice especificado.
+     *
+     * @param index El índice de la fuente de alimentación a crear.
+     * @return La fuente de alimentación correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public FuenteAlimentacion crearFuenteAlimentacion(int index) {
         if (index >= 0 && index < fuentes.size()) {
@@ -94,6 +132,12 @@ public class AMDFactory implements ComponenteFactory {
         return fuentes.get(0);
     }
 
+    /**
+     * Crea una placa base a partir del índice especificado.
+     *
+     * @param index El índice de la placa base a crear.
+     * @return La placa base correspondiente al índice, o la primera opción si el índice es inválido.
+     */
     @Override
     public PlacaBase crearPlacaBase(int index) {
         if (index >= 0 && index < placasBases.size()) {
@@ -102,7 +146,12 @@ public class AMDFactory implements ComponenteFactory {
         return placasBases.get(0);
     }
 
-    // Métodos para filtrar componentes por gama
+    /**
+     * Obtiene una lista de CPUs filtradas por la gama especificada.
+     *
+     * @param gama La gama a filtrar (alta, media, baja).
+     * @return Lista de CPUs que pertenecen a la gama especificada.
+     */
     @Override
     public List<CPU> getCPUsPorGama(String gama) {
         List<CPU> resultado = new ArrayList<>();
@@ -114,6 +163,12 @@ public class AMDFactory implements ComponenteFactory {
         return resultado;
     }
 
+    /**
+     * Obtiene una lista de GPUs filtradas por la gama especificada.
+     *
+     * @param gama La gama a filtrar (alta, media, baja).
+     * @return Lista de GPUs que pertenecen a la gama especificada.
+     */
     @Override
     public List<GPU> getGPUsPorGama(String gama) {
         List<GPU> resultado = new ArrayList<>();
@@ -125,6 +180,12 @@ public class AMDFactory implements ComponenteFactory {
         return resultado;
     }
 
+    /**
+     * Obtiene una lista de RAMs filtradas por la gama especificada.
+     *
+     * @param gama La gama a filtrar (alta, media, baja).
+     * @return Lista de RAMs que pertenecen a la gama especificada.
+     */
     @Override
     public List<RAM> getRAMsPorGama(String gama) {
         List<RAM> resultado = new ArrayList<>();
@@ -136,6 +197,12 @@ public class AMDFactory implements ComponenteFactory {
         return resultado;
     }
 
+    /**
+     * Obtiene una lista de discos duros filtrados por la gama especificada.
+     *
+     * @param gama La gama a filtrar (alta, media, baja).
+     * @return Lista de discos duros que pertenecen a la gama especificada.
+     */
     @Override
     public List<DiscoDuro> getDiscosDurosPorGama(String gama) {
         List<DiscoDuro> resultado = new ArrayList<>();
@@ -147,6 +214,12 @@ public class AMDFactory implements ComponenteFactory {
         return resultado;
     }
 
+    /**
+     * Obtiene una lista de fuentes de alimentación filtradas por la gama especificada.
+     *
+     * @param gama La gama a filtrar (alta, media, baja).
+     * @return Lista de fuentes de alimentación que pertenecen a la gama especificada.
+     */
     @Override
     public List<FuenteAlimentacion> getFuentesPorGama(String gama) {
         List<FuenteAlimentacion> resultado = new ArrayList<>();
@@ -158,6 +231,12 @@ public class AMDFactory implements ComponenteFactory {
         return resultado;
     }
 
+    /**
+     * Obtiene una lista de placas base filtradas por la gama especificada.
+     *
+     * @param gama La gama a filtrar (alta, media, baja).
+     * @return Lista de placas base que pertenecen a la gama especificada.
+     */
     @Override
     public List<PlacaBase> getPlacasBasePorGama(String gama) {
         List<PlacaBase> resultado = new ArrayList<>();
