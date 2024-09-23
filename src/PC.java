@@ -23,5 +23,7 @@ public class PC {
         System.out.println("Disco Duro: " + (discoDuro != null ? discoDuro.getDescription() : "Sin Disco Duro"));
         System.out.println("Fuente de Alimentación: " + (fuenteAlimentacion != null ? fuenteAlimentacion.getDescription() : "Sin Fuente"));
         System.out.println("Placa Base: " + (placaBase != null ? placaBase.getDescription() : "Sin Placa Base"));
+        double total = cpu.getPrecio() + gpu.getPrecio() + ram.getPrecio() + discoDuro.getPrecio() + fuenteAlimentacion.getPrecio() + placaBase.getPrecio();
+        System.out.println("Precio total: $" + total);
     }
 }
