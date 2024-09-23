@@ -1,1 +1,18 @@
-README PARA P03
+Nombre del Equipo: Los Hijos de Korhal
+Integrantes del Equipo:
+
+Pedro Yamil Salazar González - 306037445
+Gabriel Díaz Payne - 317097560
+Isaac Rivera Jiménez - 321225087
+Práctica: Práctica 2
+Sistema operativo utilizado: Se ha utilizado Linux para realizar la práctica, con la versión de Java "21.0.4".
+
+Para ejecutar el programa, escriba en la terminal: javac *.java y luego java Main.
+
+Patrones de diseño utilizados:
+
+Adapter: Este patrón se ha implementado mediante el uso de la clase CPUAdapter, que permite que diferentes tipos de CPU (AMD e Intel) se adapten a un socket común en la placa base. Esto para asegurar la compatibilidad entre componentes de diferentes fabricantes. Al usar el Adapter, se logra una integración fluida de hardware de diversas marcas, facilitando la construcción de PCs personalizadas y resolviendo incompatibilidades sin necesidad de modificar las clases originales de los componentes.
+
+Builder: El patrón Builder se utiliza a través de la clase PCBuilder, que permite la construcción de un objeto PC de manera gradual. Cada método del builder se encarga de agregar un componente específico al objeto PC, lo que simplifica el proceso de personalización. La clase OficinaPCBuilder es una implementación concreta de este patrón, donde se inicializa una nueva PC vacía y se le añaden los componentes seleccionados por el usuario. Esto hace que se separe la lógica de construcción de la representación final del objeto.
+
+Abstract Factory: El patrón Abstract Factory se ha implementado a través de las fábricas concretas IntelFactory y AMDFactory. Estas fábricas encapsulan la creación de componentes específicos para cada marca, permitiendo que el código cliente (en este caso, la clase Main) interactúe solo con la interfaz ComponenteFactory. Esto permite añadir fácilmente nuevas fábricas para otros fabricantes en el futuro sin alterar la lógica existente.
